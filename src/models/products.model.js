@@ -6,6 +6,8 @@ import {
   doc,
   addDoc,
   deleteDoc,
+  query,
+  where
 } from "firebase/firestore";
 
 const productsCollection = collection(db, "products");
@@ -57,12 +59,11 @@ export const remove = async (id) => {
 
 export const deleteByCustomId = async (customId) => {
   try {
-    const q = query(productsCollection, where("id", "==", customId));
+    const q = query(productsCollection, where("customId", "==", customId));
     const snapshot = await getDocs(q);
 
     if (snapshot.empty) return false;
 
-    // Borrar todos los documentos que coincidan
     for (const d of snapshot.docs) {
       await deleteDoc(doc(db, "products", d.id));
     }

@@ -4,6 +4,7 @@ import {
   getProductById,
   createProduct,
   deleteProduct,
+  deleteProductByCustomId
 } from "../controllers/products.controller.js";
 
 import { authMiddleware } from "../middlewares/auth.middleware.js";

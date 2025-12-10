@@ -4,7 +4,7 @@ export const login = async (email, password) => {
   if (!email || !password) throw new Error("Email y contraseña requeridos");
 
   const fakeUser = {
-    email: "test@example.com",
+    email: "test@gmail.com",
     password: "123456" 
   };
 

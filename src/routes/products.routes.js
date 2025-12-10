@@ -15,7 +15,7 @@ router.get("/", authMiddleware, getAllProducts);
 router.get("/:id", authMiddleware, getProductById);
 router.post("/create", authMiddleware, createProduct);
 router.delete("/:id", authMiddleware, deleteProduct);
-router.delete("/custom/:customId", authMiddleware, deleteByCustomId);
+router.delete("/custom/:customId", deleteByCustomId);
 
 
 export default router;

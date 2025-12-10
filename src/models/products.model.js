@@ -55,3 +55,15 @@ export const remove = async (id) => {
   }
 };
 
+export const deleteByCustomId = async (req, res) => {
+  const { customId } = req.params;
+
+  const deleted = await Product.findOneAndDelete({ id: customId });
+
+  if (!deleted) {
+    return res.status(404).json({ error: "Producto no encontrado" });
+  }
+
+  return res.json({ message: "Producto eliminado" });
+};
+

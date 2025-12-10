@@ -55,15 +55,21 @@ export const remove = async (id) => {
   }
 };
 
-export const deleteByCustomId = async (req, res) => {
-  const { customId } = req.params;
+export const deleteByCustomId = async (customId) => {
+  try {
+    const q = query(productsCollection, where("id", "==", customId));
+    const snapshot = await getDocs(q);
 
-  const deleted = await Product.findOneAndDelete({ id: customId });
+    if (snapshot.empty) return false;
 
-  if (!deleted) {
-    return res.status(404).json({ error: "Producto no encontrado" });
+    // Borrar todos los documentos que coincidan
+    for (const d of snapshot.docs) {
+      await deleteDoc(doc(db, "products", d.id));
+    }
+
+    return true;
+  } catch (error) {
+    console.error("🔥 Error en deleteByCustomId():", error);
+    throw error;
   }
-
-  return res.json({ message: "Producto eliminado" });
 };
-

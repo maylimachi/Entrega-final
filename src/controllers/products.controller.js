@@ -41,3 +41,17 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ error: "Error al eliminar el producto" });
   }
 };
+
+export const deleteProductByCustomId = async (req, res) => {
+  try {
+    const deleted = await productService.deleteByCustomId(req.params.customId);
+
+    if (!deleted) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    res.json({ message: "Producto eliminado por customId" });
+  } catch (error) {
+    res.status(500).json({ error: "Error al eliminar producto" });
+  }
+};

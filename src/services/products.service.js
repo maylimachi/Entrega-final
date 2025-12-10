@@ -16,3 +16,7 @@ export const deleteProduct = async (id) => {
   return await productModel.remove(id);
 };
 
+export const deleteByCustomId = async (customId) => {
+  return await productModel.deleteByCustomId(customId);
+};
+

@@ -4,7 +4,7 @@ import {
   getProductById,
   createProduct,
   deleteProduct,
-  deleteByCustomId
+  deleteProductByCustomId
 } from "../controllers/products.controller.js";
 
 import { authMiddleware } from "../middlewares/auth.middleware.js";
@@ -15,7 +15,7 @@ router.get("/", authMiddleware, getAllProducts);
 router.get("/:id", authMiddleware, getProductById);
 router.post("/create", authMiddleware, createProduct);
 router.delete("/:id", authMiddleware, deleteProduct);
-router.delete("/custom/:customId", deleteByCustomId);
+router.delete("/custom/:customId", authMiddleware, deleteProductByCustomId);
 
 
 export default router;
